@@ -5,25 +5,28 @@
     public static void Main(string[] args)
     {
             Console.WriteLine("Welcome to Hashtable Program");
-            LinkedHashMap<string, int> linked_hash_map = new LinkedHashMap<string, int>(5);
+            LinkedHashMap<string, int> linkedhashmap = new LinkedHashMap<string, int>(5);
 
             string Sentence = "paranoids are not paranoid because they are paranoid but because " +
                 "they keep putting themselves deliberately into paranoid avoidable situations";
             string[] Words = Sentence.Split(" ");
+            Console.Write("Enter the word you want to omit: ");
+            string Banned_Word = Console.ReadLine();
             foreach (string word in Words)
             {
-                int Value = linked_hash_map.Get(word);
-                if (Value == default)
-                    Value = 1;
-                else Value++;
-                linked_hash_map.Add(word, Value);
+                if (word != Banned_Word)
+                {
+                    int Value = linkedhashmap.Get(word);
+                    if (Value == default)
+                        Value = 1;
+                    else Value++;
+                    linkedhashmap.Add(word, Value);
+                }
             }
-            int Frequency = linked_hash_map.Get("paranoid");
-            Console.WriteLine("\"paranoid\" comes {0} times in the given paragraph", Frequency);
-            Frequency = linked_hash_map.Get("are");
-            Console.WriteLine("\"are\" comes {0} times in the given paragraph", Frequency);
-            Frequency = linked_hash_map.Get("they");
-            Console.WriteLine("\"they\" comes {0} times in the given paragraph", Frequency);
+            int Frequency = linkedhashmap.Get(Banned_Word);
+            Console.WriteLine("\n\"{0}\" comes {1} times in the given paragraph now",
+                Banned_Word, Frequency);
+            Console.WriteLine("\nResulting paragraph:\n" + linkedhashmap.Result);
         }
     }
 }
